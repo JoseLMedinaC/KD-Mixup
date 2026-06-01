@@ -1,9 +1,7 @@
 # KD-Mixup
 Knowledge Distillation and mixup are widely used techniques for improving the efficiency and generalisation of deep neural networks. While KD transfers knowledge through soft targets produced by a teacher, mixup regularises training by interpolating inputs and labels.  Despite their success, their interaction remains poorly understood.
 
-# Training strategy
-
-Knowledge Distillation with Mixup augmentation. A student model is trained to mimic a pre-trained teacher using soft targets combined with Mixup data augmentation.
+Based on this mixup-KD pipeline, a student model is trained to mimic a pre-trained teacher using soft targets combined with Mixup data augmentation.
 
 ---
 
