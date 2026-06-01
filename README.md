@@ -4,7 +4,47 @@ Knowledge Distillation and mixup are widely used techniques for improving the ef
 Based on this mixup-KD pipeline, a student model is trained to mimic a pre-trained teacher using soft targets combined with Mixup data augmentation.
 
 ---
+# KD-Teachers
 
+Pre-trained teacher models used for Knowledge Distillation with Mixup augmentation on CIFAR-10 and CIFAR-100. These checkpoints are the teacher component of the [KD-Mixup](https://github.com/JoseLMedinaC/KD-Mixup) framework.
+
+All models were fine-tuned from ImageNet pre-trained weights on CIFAR-10 and CIFAR-100 using SGD with momentum, ReduceLROnPlateau scheduling, and mixed precision training (float16).
+
+---
+
+## Models
+
+| Model | Backbone | Pre-training |
+|---|---|---|
+| `best_resnet152v2` | ResNet-152 V2 | ImageNet |
+| `best_convnexttiny` | ConvNeXt-Tiny | ImageNet |
+| `best_convnextlarge` | ConvNeXt-Large | ImageNet |
+| `best_vitbase` | ViT-B/16 | ImageNet |
+
+---
+
+## Usage
+
+Download a checkpoint and place it in your local `checkpoints/teachers/{dataset}/` folder:
+
+```python
+from huggingface_hub import hf_hub_download
+import os
+REPO_ID = "josemedina/KD-Teachers"
+DATASET = "cifar100"  # "cifar10" o "cifar100"
+TEACHER = "resnet152v2"  # "resnet152v2", "convnexttiny", "convnextlarge", "vitbase"
+filename = f"{DATASET}/best_{TEACHER}.keras"
+local_dir = f"checkpoints/teachers/{DATASET}"
+os.makedirs(local_dir, exist_ok=True)
+print(f"Downloading {filename}...")
+path = hf_hub_download(
+    repo_id=REPO_ID,
+    filename=filename,
+    local_dir="checkpoints/teachers"
+)
+print(f"Saved to: {path}")
+```
+---
 ## Training a Student Model
 
 ```bash
@@ -54,3 +94,12 @@ Supported datasets: `cifar10`, `cifar100`
 ## Citation
 
 If you use this code in your research, please cite:
+```bibtex
+@misc{medina2025kdmixup,
+  author    = {Medina, Jos{\'e} and Honeine, Paul and Bensrhair, Abdelaziz and Hadachi, Amnir},
+  title     = {Beyond Dark Knowledge: Mixup-Based Knowledge Distillation Under Vicinal Teacher Distributions},
+  year      = {2025},
+  publisher = {University of Tartu},
+  url       = {https://github.com/JoseLMedinaC/KD-Mixup}
+}
+```
