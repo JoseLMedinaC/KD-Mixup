@@ -6,17 +6,18 @@
 #SBATCH --mem=32G
 #SBATCH --time=99:00:00
 #SBATCH --partition=gpu             # Cambia a 'gpu' (antes era main)
-#SBATCH --gres=gpu:h200-141g:1
+#SBATCH --gres=gpu:a100-80g:1
 #SBATCH --exclude=falcon[1-6]
 
 # Activar el environment
 source ~/projects/KD_proj/envs/py312/bin/activate
 # Navegar al directorio
-cd ~/projects/KD_proj/
+cd ~/projects/MixUP/KD-Mixup/
 # Ejecutar el script
 #python ./scripts/multiple_teacher.py
 #python -m scripts.student_train_classic --teacher convnextlarge
 #python -m scripts.student_train_classic --teacher vitbase
 #python -m scripts.student_train_classic --teacher resnet152v2
 # Correr todas las temperaturas para convnexttiny
-python -m scripts.student_train_mixup --teacher resnet152v2 --temperature 2 --student resnet50
+python -m scripts.student_train_mixup --teacher vitbase --temperature 2 --student resnet50
+#python -m scripts.student_train_mixup --teacher convnexttiny --temperature 2 --student resnet50

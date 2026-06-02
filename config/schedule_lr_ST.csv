@@ -1,0 +1,6 @@
+start_epoch,end_epoch,start_lr,end_lr,type
+0,10,1e-5,0.5e-3,linear
+10,50,0.5e-3,1e-4,cosine
+50,200,1e-4,5e-5,cosine
+200,500,5e-5,1e-5,cosine
+500,1000,1e-5,0.5e-6,cosine

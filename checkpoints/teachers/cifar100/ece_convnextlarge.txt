@@ -1,0 +1,8 @@
+model=convnextlarge
+classes=100
+checkpoint=checkpoints/teachers/cifar100/best_convnextlarge.keras
+accuracy=0.92170000
+avg_confidence=0.91890538
+ece_bins=15
+ece=0.00492902
+confidence_minus_accuracy=-0.00279462

@@ -1,0 +1,8 @@
+model=resnet152v2
+classes=100
+checkpoint=checkpoints/teachers/cifar100/best_resnet152v2.keras
+accuracy=0.82569999
+avg_confidence=0.88730061
+ece_bins=15
+ece=0.06197910
+confidence_minus_accuracy=0.06160063

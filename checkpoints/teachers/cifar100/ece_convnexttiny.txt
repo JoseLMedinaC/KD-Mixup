@@ -1,0 +1,8 @@
+model=convnexttiny
+classes=100
+checkpoint=checkpoints/teachers/cifar100/best_convnexttiny.keras
+accuracy=0.81959999
+avg_confidence=0.79079640
+ece_bins=15
+ece=0.02880365
+confidence_minus_accuracy=-0.02880359
