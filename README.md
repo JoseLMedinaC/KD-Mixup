@@ -95,11 +95,7 @@ Supported datasets: `cifar10`, `cifar100`
 
 If you use this code in your research, please cite:
 ```bibtex
-@misc{medina2025kdmixup,
-  author    = {Medina, Jos{\'e} and Honeine, Paul and Bensrhair, Abdelaziz and Hadachi, Amnir},
+@misc{medina2025beyond,
   title     = {Beyond Dark Knowledge: Mixup-Based Knowledge Distillation Under Vicinal Teacher Distributions},
-  year      = {2025},
-  publisher = {University of Tartu},
-  url       = {https://github.com/JoseLMedinaC/KD-Mixup}
 }
 ```
