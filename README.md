@@ -95,7 +95,10 @@ Supported datasets: `cifar10`, `cifar100`
 
 If you use this code in your research, please cite:
 ```bibtex
-@misc{medina2025beyond,
-  title     = {Beyond Dark Knowledge: Mixup-Based Distillation for Reliable Predictions},
+@article{medina2026beyond,
+  title={Beyond Dark Knowledge: Mixup-Based Distillation for Reliable Predictions},
+  author={Medina, Jos{\'e} and Honeine, Paul and Bensrhair, Abdelaziz and Hadachi, Amnir},
+  journal={arXiv preprint arXiv:2606.12171},
+  year={2026}
 }
 ```
