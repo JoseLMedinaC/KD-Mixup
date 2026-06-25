@@ -30,6 +30,21 @@ python -m scripts.benchmark --student mobilenetv2 --teacher resnet152v2 --temper
 | `--alpha`, `partial` | ❌  | `[0-1]` | — | Allowed only for mixup, used for Betha(alpha,alpha) and partial mixup|
 | `internal variables` |❌ | any hyperparameter can be change or control in the distill.py  |
 
+### Mini Benchmark 
+
+Comparison with recent logit-based distillation methods on CIFAR-100 (ResNet152V2 teacher, MobileNetV2 student), all evaluated under our own implementation in an identical setup. Our configuration reaches a good balance accuracy-ECE while making the simplest assumptions.
+
+| Method | Transfer signal | Acc (%) | ECE |
+|---|---|---|---|
+| Teacher (ResNet152V2) | — | 82.6 | 0.062 |
+| Student (MobileNetV2) | cross-entropy | 81.1 | 0.142 |
+| KD (Hinton, 2015) | soft logits | 81.9 | 0.061 |
+| LSKD (Sun et al., 2024) | standardised logits | 83.4 | 0.059 |
+| RLD (Sun et al., 2025) | refined logits | 83.1 | **0.045** |
+| MIX-KD (Choi et al., 2023) | standardised logits + partial mixup | 83.6 | 0.050 |
+| **Ours** | **logits + full mixup, tuned T** | **84.1** | 0.050 |
+
+
 ---
 
 # KD-Teachers
