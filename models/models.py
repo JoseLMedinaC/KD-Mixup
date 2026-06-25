@@ -2,12 +2,13 @@ import tensorflow as tf
 from tensorflow.keras.applications import ConvNeXtTiny
 from tensorflow.keras import layers
 import keras_hub
+from classification_models.keras import Classifiers
 
-def build_mobilenetv2(input_shape=(224, 224, 3), num_classes=10, dropout_rate=0.3):
+def build_mobilenetv2(input_shape=(224, 224, 3), num_classes=10, dropout_rate=0.3,weights='imagenet'):
     base = tf.keras.applications.MobileNetV2(
         include_top=False,
         input_shape=input_shape,
-        weights='imagenet',
+        weights=weights,
         pooling="avg"
     )
     x = tf.keras.layers.Dense(256, use_bias=False)(base.output)
@@ -17,11 +18,11 @@ def build_mobilenetv2(input_shape=(224, 224, 3), num_classes=10, dropout_rate=0.
     out = tf.keras.layers.Dense(num_classes)(x)
     return tf.keras.Model(inputs=base.input, outputs=out, name="StudentMobileNet"), base
 
-def build_resnet50(input_shape=(224, 224, 3), num_classes=10, dropout_rate=0.3):
+def build_resnet50(input_shape=(224, 224, 3), num_classes=10, dropout_rate=0.3,weights='imagenet'):
     base = tf.keras.applications.ResNet50(
         include_top=False,
         input_shape=input_shape,
-        weights='imagenet',
+        weights=weights,
         pooling="avg"
     )
     x = tf.keras.layers.Dense(256, use_bias=False)(base.output)
@@ -30,6 +31,22 @@ def build_resnet50(input_shape=(224, 224, 3), num_classes=10, dropout_rate=0.3):
     x = tf.keras.layers.Dropout(dropout_rate)(x)
     out = tf.keras.layers.Dense(num_classes)(x)
     return tf.keras.Model(inputs=base.input, outputs=out, name="StudentResNet50"), base
+
+def build_resnet18(input_shape=(224, 224, 3), num_classes=100, dropout_rate=0.3,weights='imagenet'):
+    ResNet18, preprocess_input = Classifiers.get('resnet18')
+    # Build model with pretrained weights (will auto-adapt to input size)
+    base = ResNet18(input_shape=input_shape, weights=weights, include_top=False)
+    # Add classification head
+    x = tf.keras.layers.GlobalAveragePooling2D()(base.output)
+    x = tf.keras.layers.Dense(256, use_bias=False)(x)
+    x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.ReLU()(x)
+    x = tf.keras.layers.Dropout(dropout_rate)(x)
+    out = tf.keras.layers.Dense(num_classes)(x)
+    
+    model = tf.keras.Model(inputs=base.input, outputs=out, name="ResNet18")   
+    # Return model, base model, and preprocessing function
+    return model, base
 
 
 def build_vit_base(input_shape=(224, 224, 3), num_classes=100, dropout_rate=0.3):
