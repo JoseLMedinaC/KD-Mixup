@@ -28,7 +28,7 @@ python -m scripts.benchmark --student mobilenetv2 --teacher resnet152v2 --temper
 |---|---|---|---|---|
 | `--method` | ✅ | `mixup`, `lskd`, `rld` | — | Distillation Methods |
 | `--alpha`, `partial` | ❌  | `[0-1]` | — | Allowed only for mixup, used for Betha(alpha,alpha) and partial mixup|
-| `internal variables` |❌ | any hyperparameter can be change or control in the distill.py  |
+| `internal variables` |❌ | any hyperparameter can be changed or controlled in the distill.py  |
 
 ### Mini Benchmark 
 
