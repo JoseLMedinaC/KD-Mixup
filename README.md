@@ -15,7 +15,7 @@ All models were fine-tuned from ImageNet pre-trained weights on CIFAR-10 and CIF
 ## Models
 
 | Model | Backbone | Pre-training | Acc |
-|---|---|---|
+|---|---|---|---|
 | `best_resnet152v2` | ResNet-152 V2 | ImageNet |97%|
 | `best_convnexttiny` | ConvNeXt-Tiny | ImageNet |96.7%|
 | `best_convnextlarge` | ConvNeXt-Large | ImageNet |98.6%|
