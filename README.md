@@ -4,6 +4,34 @@ Knowledge Distillation and mixup are widely used techniques for improving the ef
 Based on this mixup-KD pipeline, a student model is trained to mimic a pre-trained teacher using soft targets combined with Mixup data augmentation.
 
 ---
+## Training a Student Model
+First Method
+```bash
+python -m scripts.student_train_mixup --teacher resnet152v2 --temperature 2 --student resnet50
+```
+### Arguments
+
+| Argument | Required | Options | Default | Description |
+|---|---|---|---|---|
+| `--student` | ✅ | `resnet50`, `mobilenetv2` | — | Student model architecture |
+| `--teacher` | ✅ | `resnet152v2`, `convnexttiny`, `convnextlarge`, `vitbase` | — | Teacher model architecture |
+| `--temperature` | ❌ | any float | `2.0` | Distillation temperature. Use `0` for T=std (normalization by standard deviation) |
+
+Second Method
+```bash
+python -m scripts.benchmark --student mobilenetv2 --teacher resnet152v2 --temperature 2 --method mixup --alpha 1 --partial 1
+```
+
+### Extra Arguments
+
+| Argument | Required | Options | Default | Description |
+|---|---|---|---|---|
+| `--method` | ✅ | `mixup`, `lskd`, `rld` | — | Distillation Methods |
+| `--alpha`, `partial` | ❌  | `[0-1]` | — | Allowed only for mixup, used for Betha(alpha,alpha) and partial mixup|
+| `internal variables` |❌ | any hyperparameter can be change or control in the distill.py  |
+
+---
+
 # KD-Teachers
 
 Pre-trained teacher models used for Knowledge Distillation with Mixup augmentation on CIFAR-10 and CIFAR-100. These checkpoints are the teacher component of the [KD-Mixup](https://github.com/JoseLMedinaC/KD-Mixup) framework.
@@ -44,21 +72,6 @@ path = hf_hub_download(
 )
 print(f"Saved to: {path}")
 ```
----
-## Training a Student Model
-
-```bash
-python -m scripts.student_train_mixup --teacher resnet152v2 --temperature 2 --student resnet50
-```
-
-### Arguments
-
-| Argument | Required | Options | Default | Description |
-|---|---|---|---|---|
-| `--student` | ✅ | `resnet50`, `mobilenetv2` | — | Student model architecture |
-| `--teacher` | ✅ | `resnet152v2`, `convnexttiny`, `convnextlarge`, `vitbase` | — | Teacher model architecture |
-| `--temperature` | ❌ | any float | `2.0` | Distillation temperature. Use `0` for T=std (normalization by standard deviation) |
-
 ---
 
 ## Teacher Checkpoints
